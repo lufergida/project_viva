@@ -14,7 +14,6 @@ class ListView(APIView):
     """List proof"""
     serializer_class = serializers.ProofSerializer
     
-    
     def get(self, request, format=None):
         """Returns a list of characteristics"""
         an_apiview = [
@@ -123,9 +122,3 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
         serializer.save(user_profile=self.request.user)
     
     
-    
-                  
-                
-                
-                
-# Create your views here

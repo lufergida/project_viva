@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Flight, Seats
+from .models import *
 
 
 
@@ -11,7 +11,7 @@ class FlightSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SeatsSerializer(serializers.ModelSerializer):
+class SeatMapSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Seats
+        model = SeatMap
         fields = '__all__'

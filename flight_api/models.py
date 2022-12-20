@@ -5,6 +5,7 @@ class Flight(models.Model):
     """To define a flight object """
     flight_number = models.CharField(max_length=50, blank=True,unique=True)
     date_reserved = models.DateTimeField(blank=True, null=True)
+    origin = models.CharField(max_length=50, blank=True, null=True)
     destination = models.CharField(max_length=50, blank=True)
     capacity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)

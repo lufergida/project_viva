@@ -6,6 +6,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import logout
 
 from profiles_api import serializers, models, permissions
 
@@ -106,6 +107,15 @@ class UserLoginApiView(ObtainAuthToken):
     """Create a token for a user"""
     renderer_classes= api_settings.DEFAULT_RENDERER_CLASSES
     
+    
+    
+class LogoutView(APIView):
+    def post(self, request):
+        logout(request)
+        return Response({'message': 'Logout successful'})
+        
+
+
 class UserProfileFeedViewSet(viewsets.ModelViewSet):
     """Create, read and update feed for a profile"""
     authentication_classes=(TokenAuthentication,)

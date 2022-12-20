@@ -7,3 +7,6 @@ admin.site.register(Flight)
 admin.site.register(SeatMap)
 
 
+
+
+

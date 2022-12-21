@@ -125,10 +125,14 @@ class Users(APIView):
         serializer = UserSerializerTest(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.data
+        
         ## agregar línea de código, que vaya a la base de datos y me guarde
         ## lo que me mandaron en el body de la petición.
-        #new_user= models.UserProfile(email=data['email'], name=data['name'])
-        #new_user.save()
+        # new_user = models.UserProfile(
+        #     email=data['email'], 
+        #     name=data['name'],
+        #     password=data['password'])
+        # new_user.save()
         return Response({"Hello": f"{data['name']}"})
 
 

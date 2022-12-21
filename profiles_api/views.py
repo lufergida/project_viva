@@ -7,7 +7,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import logout
-
+from .serializers import UserSerializerTest
 from profiles_api import serializers, models, permissions
 
 
@@ -97,11 +97,11 @@ class HelloViewSet(viewsets.ViewSet):
 class UserProfileViewSet(viewsets.ModelViewSet):
     """Create and update a user profile"""
     serializer_class = serializers.UserProfileSerializer
-    queryset= models.UserProfile.objects.all()
-    authentication_classes= (TokenAuthentication,)
-    permission_classes= (permissions.UpdateOwnProfile,)
-    filter_backends= (filters.SearchFilter,)
-    search_fields= ('name', 'email',)
+    queryset = models.UserProfile.objects.all() ## QUERY SET.
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnProfile,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'email',)
     
 class UserLoginApiView(ObtainAuthToken):
     """Create a token for a user"""
@@ -113,7 +113,24 @@ class LogoutView(APIView):
     def post(self, request):
         logout(request)
         return Response({'message': 'Logout successful'})
-        
+
+class Users(APIView):
+    def get(self, request):
+        queryset = models.UserProfile.objects.all()  
+        dictionaries = [obj for obj in queryset.values()]
+        return Response(dictionaries)
+
+    def post(self, request):
+        print(f"BODY INFO: {request.data} \n\n")
+        serializer = UserSerializerTest(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.data
+        ## agregar línea de código, que vaya a la base de datos y me guarde
+        ## lo que me mandaron en el body de la petición.
+        #new_user= models.UserProfile(email=data['email'], name=data['name'])
+        #new_user.save()
+        return Response({"Hello": f"{data['name']}"})
+
 
 
 class UserProfileFeedViewSet(viewsets.ModelViewSet):
@@ -132,3 +149,5 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
         serializer.save(user_profile=self.request.user)
     
     
+
+

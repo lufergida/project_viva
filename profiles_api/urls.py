@@ -9,6 +9,7 @@ router.register('feed', views.UserProfileFeedViewSet)
                
 urlpatterns = [
     path('list-view/', views.ListView.as_view()),
+    path('userList/', views.Users.as_view()),
     path('login/', views.UserLoginApiView.as_view()),
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('', include(router.urls))

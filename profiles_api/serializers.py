@@ -4,7 +4,11 @@ from profiles_api import models
 class ProofSerializer(serializers.Serializer):
     """Serializer for a field in our APIView"""
     name= serializers.CharField(max_length=10)
-    
+
+
+class UserSerializerTest(serializers.Serializer):
+    name = serializers.CharField(max_length=10, required=True)
+
 class UserProfileSerializer(serializers.ModelSerializer):
     """Serializer a object user profiles_api"""
     
